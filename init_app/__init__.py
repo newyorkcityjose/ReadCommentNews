@@ -5,15 +5,15 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from newsapi import NewsApiClient
 from init_app.models import User, db, connect_db
-
+from init_app.local_settings import DATABASE, API
 app = Flask(__name__)
 
 CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
-newsapi = NewsApiClient(api_key='0ec714799f4242c18d921cb262b0eb60')
+newsapi = NewsApiClient(api_key=API)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql://postgres:springboard@localhost/ReadNewsComment01'))
+    os.environ.get('DATABASE_URL', DATABASE))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False

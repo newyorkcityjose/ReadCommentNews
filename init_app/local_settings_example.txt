@@ -1,0 +1,2 @@
+DATABASE = 'postgresql://postgres:<password>@<host>/<Name Database>'
+API key connect to Newsapi.org
