@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block target %}
+
+<br>
+
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+                <h1 style="text-align:center; margin-block-start: -70px;"><u>{{context.cat}}</u></h1>
+                {% for ids, news, desc, img, url, saved, time in context.mylist %}
+                <div class="card" style="margin-left:30px; margin-block-start: 30px; margin-block-end: 40px;">
+                    <div class="card-body h-100">          
+                    
+                            <div class="media" id={{ids}}>
+                              <!-- <img src="{{img}}" class="card-img-top" width="90" height="90" alt="..."> -->
+                              <div class="card-body">
+                                <h5 class="card-title">{{news}}</h5>
+                                <p class="card-text">{{desc}}</p>
+                                
+                                <form action="/">
+                                <a href="{{ url }}" class="btn btn-primary" target="_blank">More Info</a>              
+                                </form>
+
+                                <button class="btn btn-sm m-auto">
+                                    {% if not saved %}
+                                     <i class="far fa-bookmark"></i>
+                                    {% else %} 
+                                     <i class="fas fa-bookmark"></i>
+                                    {% endif %}
+                                </button> 
+                                  Bookmark
+                    
+                              </div>
+                              <div class="card-footer">
+                                <small class="text-muted">{{ time }}</small>
+                              </div>
+                            </div>
+                    </div>
+                    
+                </div>
+                <hr>
+                {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,81 @@
+
+{% extends 'index.html' %}
+
+{% block target %}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 col-xl-3 order-2 order-lg-1">
+      <div class="card mb-3">
+        <div class="card-body text-center">
+          <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Kathy Davis" class="img-fluid rounded-circle mb-2" width="128" height="128">
+          <h4 class="card-title mb-0">{{current_user.username}}</h4>
+                        <div class="text-muted mb-2">Front-end Developer</div>
+                        
+                        <div>
+                          <a class="btn btn-primary btn-sm" href="#">Follow</a>
+                          <a class="btn btn-primary btn-sm" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg> Message</a>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+
+                <div class="card">
+                    <div class="card-body h-100">          
+                    
+                            <div class="media" id={{ids}}>
+                                <!-- <img src="{{img}}" class="card-img-top" width="90" height="90" alt="..."> -->
+                                <div class="card-body">
+                                <h5 class="card-title">{{bookmark.news}}</h5>
+                                <p class="card-text">{{bookmark.description}}</p>
+                                
+                                <br>
+
+                                
+                                    <div id={{comment.id}}>
+                                        <h3>{{comment.user_id}}</h3>
+                                        <p class="comment">{{comment.comment}}</p>
+                                        
+                                        <p>Created: {{comment.create_date}}</p>
+
+                                        <form action="/">
+                                            <a href="{{ bookmark.url }}" class="btn btn-primary">More Info</a>              
+                                            </form>
+                                            <br>
+            
+                                            <form method="POST" action="/comment/{{bookmark.id}}/" class="comment_form">
+                                                
+                                                <div class="form-group">
+                                                    <textarea class="form-control" rows="7" name="comment"></textarea>
+                                                </div>
+                                                
+                                                <button type="submit" class="btn-primary">Submit</button>
+                                                
+                                            </form>
+                                        <button class="btn comment">Comment</button>
+                                        
+                                      <hr>
+                                    </div>
+                                
+
+
+                                </div>
+                                
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
+  
+
+{% endblock %}

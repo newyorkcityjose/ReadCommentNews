@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block target  %}
+  <div class="col-sm-6">
+    <ul class="list-group" id="messages">
+
+          <a href="/users/{{ user.id }}">
+          </a>
+
+          <div>
+            <a href="/users/{{ user.id }}">@{{ current_user.username }}</a>
+          </div>
+          <form method="POST">
+            <button class="btn">
+              <i class="fa fa-thumbs-up"></i>
+            </button>
+          </form>
+
+        </li>
+
+    </ul>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+
+{% extends 'index.html' %}
+
+{% block target %}
+<br>
+
+    
+            
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+              <h1 style="text-align:center; margin-block-start: -70px;"><u>BOOKMARKS</u></h1>
+              
+              {% for bookmark in bookmarks %}
+                <div class="card" style="margin-left:30px; margin-block-start: 30px; margin-block-end: 40px;">
+                    <div class="card-body h-100">          
+                    
+                            <div class="media" id={{ids}}>
+                              <!-- <img src="{{img}}" class="card-img-top" width="90" height="90" alt="..."> -->
+                              <div class="card-body">
+                                <a href="/users/{{current_user.id}}/bookmark/{{bookmark.id}}"><h5 class="card-title">{{bookmark.news}}</h5></a>
+                                <p class="card-text">{{bookmark.description}}</p>
+                                
+                                <form action="/">
+                                <a href="{{ bookmark.url }}" class="btn btn-primary">More Info</a>              
+                                </form>
+                                <br>
+                               
+      
+                                <br>
+                              </div>
+                             
+                            </div>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
+
+{% endblock %}

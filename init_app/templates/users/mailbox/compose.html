@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block target %}
+
+	
+
+
+<div class="col-md-12 col-lg-8">
+	<form class="form-horizontal" role="form" action="{% if reply %}/compose_message/{{discussion.id}}/?reply=1{% else %}/compose_message/{{user.id}}/{% endif %}"  method="POST">{{ form.hidden_tag() }}
+		<div class="form-group">
+			<label for="to" class="col-sm-1 control-label">To:</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control select2-offscreen" id="to" name="to" tabindex="-1" value="{{user.username}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="cc" class="col-sm-1 control-label">CC:</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control select2-offscreen" id="title" name="title" tabindex="-1">
+			</div>
+		</div>
+		
+		<div class="col-sm-11 col-sm-offset-1">
+			
+			<textarea class="form-control" id="message" name="message" rows="12" placeholder="Click here to reply"></textarea>
+
+			<br>
+
+			<input type="submit" class="btn btn-success" value="Send">
+
+		</div>	
+	</form> 
+</div>
+
+{% endblock %}

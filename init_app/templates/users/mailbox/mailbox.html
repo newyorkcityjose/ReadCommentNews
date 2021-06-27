@@ -1,0 +1,140 @@
+{% extends 'index.html' %}
+
+
+
+    {% block target %}
+    <div class="col-md-12 col-lg-8">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="m-5" style="cursor: pointer;" class='active'><a data-target="/inbox/">Inbox</a></li>
+            <li role="presentation" class="m-5"  style="cursor: pointer;"><a data-target="/outbox/">Outbox</a></li>
+        </ul>   
+        <div class="tab-content">
+            <div class="col-md-12 col-lg-8">
+                <table class="table email-table no-wrap table-hover v-middle mb-0 font-14 messages">
+                    <thead>
+                        <tr>
+                            <th class='message-from'></th>
+                            <th>Title</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    <table class="table discussion">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+                <th>Create date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+   
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const navs = document.querySelector('.nav-tabs');
+            navs.addEventListener("click", function(event){
+                const nav_button = event.target.getAttribute('data-target');
+                request_messages(nav_button);
+                
+            });
+
+            request_messages("/inbox/");
+
+            function request_messages(url){
+                const mess_from = document.querySelector(".message-from");
+                
+                if(url === '/inbox/'){
+                    mess_from.innerHTML = "From";
+                }
+                else{
+                    mess_from.innerHTML = "To";
+                }
+                fetch(url,{
+                        method:'GET',
+                        headers:{
+                        'X-Requested_With': 'XMLHttpRequest',
+                    }
+                    }).then(response => {
+                        return response.json();
+                    }).then(data => {
+                        render_messages(data);
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            }
+
+            function render_messages(data){
+                const table_messages = document.querySelector(".email-table").querySelector("tbody");
+
+                table_messages.innerHTML = "";
+                data.forEach(element => {
+                    let row = `
+                        <tr id="${element.id}">
+                            <td sytle="cursor:pointer;">${element.username}</td>
+                            <td>${element.title}</td>
+                            <td>${element.content}</td>
+                        </tr>
+                    `;
+                    table_messages.innerHTML += row;
+                });
+            }
+            
+
+            const table = document.querySelector('.messages');
+            table.addEventListener("click", function(event){
+                let row = event.target.closest('tr').id;
+                let url = `/inbox/${row}`;
+                fetch(url,{
+                    method: 'GET',
+                    headers:{
+                        'X-Requested_With': 'XMLHttpRequest',
+                    }
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    render_discussion(data);
+                }).catch(error => {
+                    console.log(error);
+                })
+            });
+
+            function render_discussion(data){
+                const tbody = document.querySelector('.discussion').querySelector('tbody');
+                tbody.innerHTML = "";
+                data.forEach(element => {
+                    let row = `
+                        <tr>
+                            <td>${element.from}</td>
+                            <td>${element.message}</td>
+                            <td>${element.create_date}</td>
+                        </tr>
+                    `
+                    tbody.innerHTML += row;
+                });
+            }
+        });
+
+    </script>
+
+   {% endblock %}
+   
+
+ 
+
+   
+
+
+

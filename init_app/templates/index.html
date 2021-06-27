@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lucate</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+
+   
+    
+</head>
+<body style="margin: auto;" >
+    <section id="header_section_wrapper" style="margin-left:100px; position: absolute;">
+        <div class="container">
+            <div class="header-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="left_section">
+                                                <span class="date" id="current_date">
+                                                    
+                                                </span>
+                            <!-- Date -->
+                                                <!-- <span class="time">
+                                                    
+                                                </span> -->
+                            <!-- Time -->
+                            <div class="social">
+                                <a class="icons-sm fb-ic"><i class="fab fa-facebook"></i></a>
+                                <!--Twitter-->
+                                <a class="icons-sm tw-ic"><i class="fab fa-twitter"></i></a>
+                                <!--Google +-->
+                                <a class="icons-sm inst-ic"><i class="fab fa-instagram"> </i></a>
+                                <!--Linkedin-->
+                                <a class="icons-sm tmb-ic"><i class="fab fa-tumblr"> </i></a>
+                                <!--Pinterest-->
+                                <a class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
+                            </div>
+                            <!-- Top Social Section -->
+                        </div>
+                        <!-- Left Header Section -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="logo">
+                            <a href="/"><img src="/static/image/1logo.png" alt="Tech NewsLogo"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="right_section">
+                                <ul class=" navbar-nav navbar-right">
+                                    {% if not current_user.is_authenticated %}
+                                    <li><a href="/signup">Sign up</a></li>
+                                    <li><a href="/login">Log in</a></li>
+                                    {% else %}
+                                    <li>
+                                      <a href="/users/{{ current_user.id}}/bookmark">
+                                        Bookmark
+                                      </a>
+                                    </li>
+                                    <li><a href="/logout">Log out</a></li>
+                                      {% endif %}
+
+                                </ul>
+                            
+                        </div>
+
+                     
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <!-- Flash messages -->
+            
+            <div class="container" style="margin-block-start: 20px;">
+                {% for category, message in get_flashed_messages (with_categories=True) %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Header Section -->
+
+
+    
+            <div class="navigation-section">
+                <nav class="navbar m-menu navbar-default">
+                    <div class="container">
+                        
+                        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+                            <ul class="nav navbar-nav main-nav">
+                                <li><a href="/news/">Top Headlines</a></li>
+                                <li><a href="/news/?cat=technology">Technology</a></li>
+                                <li><a href="/news/?cat=business">Business</a></li>
+                                <li><a href="/news/?cat=sports">Sports</a></li>
+                                <li><a href="/news/?cat=entertainment">Entertainment</a></li>
+                            </ul>
+                        </div>
+                        <!-- .navbar-collapse -->
+                    </div>
+                    <!-- .container -->
+                </nav>
+                <!-- .nav -->
+            </div>
+            <!-- .navigation-section -->
+        </div>
+        <!-- .container -->
+    </section>
+    <!-- Latest compiled and minified CSS -->
+<br>
+      
+      
+      {% if not current_user.is_authenticated %}
+      <div class="container" style="margin-left:100px; position: absolute;margin-block-start:250px;">
+        <div class="row">
+
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+                <div class="card">
+                    <div class="card-body h-100">
+                        {% for news, desc, img, url in context %}
+                        <div class="media">
+                            <!-- <img src="{{ img }}" width="56" height="56" alt="Andrew Jones"> -->
+                            <div class="media-body">
+                                <small class="float-right text-navy"></small>
+                                <p class="mb-2"><strong>{{news}}</strong></p>
+                                <p>
+                                    {{ desc }}
+                                </p>
+                                <small class="text-muted">Today 7:21 pm</small>
+                                <br>
+                                <form action="/">
+                                    <a href="{{ url }}" class="btn btn-primary" target="_blank">More Info</a>              
+                                  </form>
+                  
+                                  <!-- <button class="btn btn-sm m-auto">
+                                    <i class="fas fa-bookmark"></i>
+                                  </button>
+                                  Bookmark -->
+                                  <button class="btn btn-sm m-auto">
+                                    {% if not saved %}
+                                     <i class="far fa-bookmark"></i>
+                                    {% else %} 
+                                     <i class="fas fa-bookmark"></i>
+                                    {% endif %}
+                                </button> 
+                                
+                                  Bookmark
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    {% else %}
+    <div class="container" style="margin-left:100px; position: absolute;margin-block-start:250px;">
+        <div class="row">
+            <div class="col-12 col-xs-3 row row-no-gutters order-2 order-lg-1">
+                <div class="card mb-1" style=" margin-left:12px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); padding: 2px 16px; transition: 0.3s; border-radius: 5px 5px;  display: inline-block; padding: 8px;">
+                    <div class="card-body text-center">
+                        <img src="{{current_user.get_profile_image}}"  class="img-fluid rounded-circle mb-2" style="border-radius: 5px 5px; position: relative;  width:128px; height:128px;">
+                        <h4 class="card-title mb-0">{{current_user.username}}</h4>
+                        <div class="text-muted mb-2">{{current_user.bio}}</div>
+                            
+                        <!-- <div>
+                            <a class="btn btn-primary btn-sm" href="/list_users/{{current_user.id}}/?filter=True">Following</a>
+                            
+                            <a  class="btn btn-primary btn-sm" href="/profile/">
+                                <i class="glyphicon glyphicon-pencil"></i>    Edit
+                            </a>
+
+                            <a  class="btn btn-primary btn-sm" href="/list_users/{{current_user.id}}/"> <i class="fas fa-list fa-1x"></i></a>
+                            
+                            <a class="btn btn-primary btn-sm" href="/inbox/">
+                                <i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>   Inbox
+                              </a>
+                            
+                        </div> -->
+                        <div>
+                        <div style="margin-left:50px;float: left; width: 70px "> <a class="btn btn-primary btn-sm" href="/list_users/{{current_user.id}}/?filter=True">Following</a></div>
+                            
+                            <div style="float: left; width: 70px">   <a  class="btn btn-primary btn-sm " href="/profile/"> <i class="glyphicon glyphicon-pencil"></i>    Edit</a></div>
+
+                            <div style="margin-left:37px;margin-right:-5px;margin-block-start:3px;float: left; width: 93px">                            <a  class="btn btn-primary btn-sm"style="width:70px;" href="/list_users/{{current_user.id}}/"> <i class="fas fa-list fa-1x"></i></a></div>
+                            
+                            <div style="margin-block-start:3px; float: left; width: 60px">   <a  class="btn btn-primary btn-sm" href="/mailbox/"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>   Inbox</a></div>
+                            <!-- <div style="margin-block-start:3px; float: left; width: 60px"><i class="btn btn-primary btn-sm compose">Compose</i></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+    
+    {% endif %}
+    {% block target %}
+
+    
+    {% endblock %}
+        <!-- <div class="container">
+            <div class="row">
+                     <div class="footer" style="position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;">
+          <p>Footer</p>
+        </div>   
+            </div>
+        </div> -->
+
+    <!-- <div class="container" style="margin-left:100px; position: absolute;margin-block-start:250px;">
+        <div class="row">
+    
+              
+<div class="footer-dark" 
+style=" margin:0px; padding:50px 0; color:white; background-color:black; width:100%;  ">
+    <footer>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-20 col-md-3 item">
+                    <h3 style="margin-top:0; margin-bottom: 12px; font-weight: bold; font-size:16px;">About</h3>
+                    <ul style="padding:0; list-style:none; line-height: 1.6; font-size:14px; margin-bottom: 0; ">
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;">Company</a></li>
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;">Team</a></li>
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;"></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3 style="margin-top:0; margin-bottom: 12px; font-weight: bold; font-size:16px;">Services</h3>
+                    <ul style="padding:0; list-style:none; line-height: 1.6; font-size:14px; margin-bottom: 0;">
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;">Development</a></li>
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;">Hosting</a></li>
+                        <li><a style="color:inherit; text-decoration: none; opacity:0.6;"></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text" >
+                    <h3 style="margin-top:0; margin-bottom: 12px; font-weight: bold; font-size:16px;">
+                        Name
+                    </h3>
+                    <p style="margin-bottom: 36px; opacity:0.6;">  
+                        A new Target PS5 restock is reportedly dropping very soon, though unfortunately, we don't know when exactly the new stock will release. According to a variety of reports, Target started to receive new PS5 stock at the start of the week, which in turn suggests… 
+                    </p>
+
+                    <div class="col item social" >
+                        <a href="#" style="text-align:center;margin-top: 20px; font-size:20px; width:36px;height:36px; line-height:36px; display:inline-block; text-align: center; border-radius: 50%; box-shadow:grey; margin:0 8px; color:#fff; opacity:0.75;"><i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" style="text-align:center;margin-top: 20px; font-size:20px; width:36px;height:36px; line-height:36px; display:inline-block; text-align: center; border-radius: 50%; box-shadow:grey; margin:0 8px; color:#fff; opacity:0.75;"><i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" style="text-align:center;margin-top: 20px; font-size:20px; width:36px;height:36px; line-height:36px; display:inline-block; text-align: center; border-radius: 50%; box-shadow:grey; margin:0 8px; color:#fff; opacity:0.75;"><i class="fab fa-instagram"></i>
+                    </a>
+                  
+                </div>
+                </div>
+                <p class="copyright" style=" opacity:0.6; margin-left: 15px; ">Company Name <i class="fa fa-copyright"></i>2021</p>
+               
+
+                
+
+            </div>
+
+        </div>
+    </footer>
+
+</div>
+
+     -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="/static/script/script.js"></script>
+</body>
+</html>

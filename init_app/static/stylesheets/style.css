@@ -1,0 +1,248 @@
+
+body {
+    font-family: 'Roboto', serif;
+    font-size: 13px;
+    line-height: 21px;
+    color: #7d7d7d;
+    background: #ffffff;
+}
+
+
+/* --------------------------------------
+ * Global Typography
+ *------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', serif;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 1.7em;
+    line-height: 1.3em;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 1.7em;
+    line-height: 1.7em;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 400;
+}
+
+h6 {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: normal;
+}
+
+
+/* --------------------------------------
+ * LINK STYLE
+ *------------------------------------------*/
+
+a {
+    color              : #010101;
+    text-decoration    : none;
+    -webkit-transition : all 0.3s ease 0s;
+    -moz-transition    : all 0.3s ease 0s;
+    -o-transition      : all 0.3s ease 0s;
+    transition         : all 0.3s ease 0s;
+}
+
+a,
+a:active,
+a:focus,
+a:active {
+    text-decoration : none;
+    outline         : none
+}
+
+a:hover,
+a:focus {
+    color: #58c4dc;
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* --------------------
+ *  main Wrapper
+ * -------------------*/
+
+.m16 {
+    margin-top: 16px;
+}
+
+.m30 {
+    margin-top: 30px;
+}
+
+section {
+    margin-top: 30px;
+}
+
+
+.header-section .left_section {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+}
+
+.header-section .date {
+    border-bottom: 1px solid #000;
+    padding-bottom: 15px;
+}
+
+.header-section .time {
+    border-bottom: 1px solid #f4f4f4;
+    padding-bottom: 15px;
+}
+
+.header-section .social {
+    margin-top: 20px;
+}
+
+.header-section .social i {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+
+.right_section .nav {
+    float: right;
+}
+
+
+.right_section .btn {
+    border: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 3px 10px 15px;
+}
+
+.right_section .navbar-nav > li:first-child a:after {
+    content: " /";
+    margin-left: 5px;
+}
+
+/* .right_section .navbar-nav > li:last-child {
+    border-bottom: 1px solid #000;
+} */
+
+.right_section .navbar-nav > li > a {
+    padding: 0 6px 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #7d7d7d;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/*-----------------------------
+ NAVIGATION STYLE
+--------------------------------*/
+
+
+/*Navigation*/
+
+.navigation-section .navbar-default {
+    border-top: 1px solid #000;
+    border-bottom: 2px solid #000;
+    margin-top: 10px;
+    background: transparent;
+    border-radius: 0;
+}
+
+
+.navigation-section .navbar-nav {
+    margin: 0 18%;
+}
+.navbar-default {
+    background-color: #fff;
+    padding: 5px 0;
+    border-color: transparent;
+    transition: all .5s ease-in-out;
+}
+.navbar-right .dropdown-menu {
+    right: auto;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #000;
+    padding: 8px 17px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/*------------------------------------------------
+ pagination style
+-----------------------------------------------*/
+
+.pagination_section {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-radius: 0;
+}
+
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-radius: 0;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    color: #101010;
+    background-color: #eee;
+    border-radius: 0;
+    margin-right: 4px;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:active {
+    background-color: #e25b5b;
+}
+
+
+/*------------------------------------------------
+ footer-top style
+-----------------------------------------------*/
+
+

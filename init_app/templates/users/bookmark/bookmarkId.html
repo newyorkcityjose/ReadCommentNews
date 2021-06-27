@@ -1,0 +1,130 @@
+
+{% extends 'index.html' %}
+
+{% block target %}
+<br>
+<div class="container">
+  <div class="row">
+            
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+
+                <div class="card" style="margin-left:30px; margin-block-start: 30px; margin-block-end: 40px;">
+                    <div class="card-body h-100">          
+                    
+                            <div class="media" id={{ids}}>
+                                <!-- <img src="{{img}}" class="card-img-top" width="90" height="90" alt="..."> -->
+                                <div class="card-body">
+                                  <h5 class="card-title">{{bookmark.news}}</h5>
+                                  <p class="card-text">{{bookmark.description}}</p>
+                                  
+                                  <form action="/">
+                                  <a href="{{ bookmark.url }}" class="btn btn-primary">More Info</a>              
+                                  </form>
+                                  <br>
+
+                                  <form method="POST" action="/comment/{{bookmark.id}}/" class="comment_form">
+                                      
+                                      <div class="form-group">
+                                          <textarea class="form-control" rows="7" name="comment"></textarea>
+                                      </div>
+                                      
+                                      <button type="submit" class="btn-primary">Submit</button>
+                                      
+                                  </form>
+                                  </div>
+                            </div>
+        
+                                <br>
+                            <div class="comments">
+
+
+                            </div>
+
+                                <!-- {% for comment in comments%}
+                                    <div id={{comment.id}}>
+                                        <h3>{{comment.user_id}}</h3>
+                                        <p class="comment">{{comment.comment}}</p>
+                                        
+                                        <p>Created: {{comment.create_date}}</p>
+                                        <button class="btn comment">Comment</button>
+                                        
+                                      <hr>
+                                    </div>
+                                {% endfor %} -->
+
+
+                                
+                                
+                            
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    request = $.ajax({
+        type: "GET",
+        url: "/comment/{{bookmark.id}}/",
+        dataType: "json",       
+    });
+
+    request.done(function(data){
+      // console.log(data)
+      comment_div = $("div.comments");
+      const out_html = render_comment(data, 0);
+      comment_div.html(out_html);
+    })
+    
+  })
+
+  $('div.comments').on('click', 'button.comment', function(event){
+    console.log("Here");
+    // let accordin = `<form method="POST" action="/comment/{{bookmark.id}}/">
+    //                   <div class="form-group">
+    //                       <textarea class="form-control" rows="7" name="comment"></textarea>
+    //                   </div>
+    //                   <button type="submit" class="btn-primary">Submit</button>
+    //               </form>`
+    //   comment_div=(accordin)
+    div_id = "#" + $(this).closest("div").attr('id');
+    $('textarea.form-control').val(div_id + ": ");
+  })
+
+  const render_comment = function(data, level){
+    let list_html = "";
+    for(var prop in data) {
+        list_html += `<div style="padding-left: ${30 * level}px;" id=${data[prop].id}>
+              <h3>${data[prop].user_id}</h3>
+                <p>${data[prop].comment}</p>
+                <p>Created: ${data[prop].create_date}</p>
+                <button class="btn comment">Comment</button>
+              <hr>
+            </div>`
+
+        if (data[prop].comments_exists){
+          list_html += render_comment(data[prop].comments_exists, level + 1);
+        }
+    }
+    return list_html
+  }
+
+  const form = document.querySelector(".comment_form");
+  form.addEventListener("submit", function(e){
+    
+    if(this.querySelector(".form-control").value.trim().length == 0){
+      e.preventDefault();
+      alert("Please write some comment!")
+    }
+  })
+
+  
+
+  </script>    
+
+
+{% endblock %}

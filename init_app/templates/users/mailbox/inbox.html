@@ -1,0 +1,87 @@
+
+{% extends 'users/mailbox/mailbox.html' %}
+
+	{% block target %}
+
+    {{ super() }}
+
+        <div class="col-md-12 col-lg-8">
+            <table class="table email-table no-wrap table-hover v-middle mb-0 font-14 messages">
+            <tbody >
+                {% for message in messages%}
+                    <!-- row -->
+                    <tr id="{{message.id}}" style="cursor:pointer;" >
+                        <td class="card-text">{{message.username}}</td>
+                        <td>
+                            <span class="mb-0 ">{{message.content}}</span>
+                        </td>
+                        <td>
+                            <a class="link">
+                                <span class="text-dark">{{message.title}}</span>
+                            </a>
+                        </td>
+                        <td >May 13</td>
+                    </tr>                                 
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <div class="container">
+        <table class="table discussion">
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    const table = document.querySelector('.messages');
+    table.addEventListener("click", function(event){
+        let row = event.target.closest('tr').id;
+        let url = `/inbox/${row}`;
+        fetch(url,{
+            method: 'GET',
+            headers:{
+                'X-Requested_With': 'XMLHttpRequest',
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            render_discussion(data);
+        }).catch(error => {
+            console.log(error);
+        })
+    });
+
+    function render_discussion(data){
+        const tbody = document.querySelector('.discussion').querySelector('tbody');
+        tbody.innerHTML = "";
+        data.forEach(element => {
+            let row = `
+                <tr>
+                    <td>${element.from}</td>
+                    <td>${element.to}</td>
+                    <td>${element.message}</td>
+                </tr>
+            `
+            tbody.innerHTML += row;
+        });
+    }
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+
+{% extends 'index.html' %}
+
+{% block target %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-4 col-xl-3 order-2 order-lg-1">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <img src="{{user.get_profile_image}}" alt="Kathy Davis" class="img-fluid rounded-circle mb-2" width="128" height="128">
+                    <h4 class="card-title mb-0">{{user.username}}</h4>
+                    <div class="text-muted mb-2">{{user.bio}}</div>
+                        
+                    <!-- <div>
+                        <a class="btn btn-primary btn-sm" href="/list_users/{{current_user.id}}/?filter=True">Following</a>
+                        
+                        <a  class="btn btn-primary btn-sm" href="/profile/"> <i class="fas fa-edit fa-1x">Edit</i></a>
+                        <a  class="btn btn-primary btn-sm" href="/list_users/{{current_user.id}}/"> <i class="fas fa-list fa-1x"></i></a>
+                        
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+<br>      
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+              <h1><u>BOOKMARKS</u></h1>
+              
+              {% for bookmark in bookmarks %}
+                <div class="card">
+                    <div class="card-body h-100">          
+                    
+                            <div class="media" id={{ids}}>
+                              <!-- <img src="{{img}}" class="card-img-top" width="90" height="90" alt="..."> -->
+                              <div class="card-body">
+                                <a href="/users/{{user.id}}/bookmark/{{bookmark.id}}"><h5 class="card-title">{{bookmark.news}}</h5></a>
+                                <p class="card-text">{{bookmark.description}}</p>
+                                
+                                <form action="/">
+                                <a href="{{ bookmark.url }}" class="btn btn-primary">More Info</a>              
+                                </form>
+                                <br>
+                               
+      
+                                <br>
+                              </div>
+                             
+                            </div>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,217 @@
+{% for error in field.errors %}
+                <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+              {{ field(placeholder=field.label.text, class="form-control mb-5 form-group control-label") }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replucate</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+</head>
+<body>
+    <section id="header_section_wrapper" class="header_section_wrapper">
+        <div class="container">
+            <div class="header-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="left_section">
+                                                <span class="date">
+                                                    Sunday .
+                                                </span>
+                            <!-- Date -->
+                                                <span class="time">
+                                                    09 August . 2016
+                                                </span>
+                            <!-- Time -->
+                            <div class="social">
+                                <a class="icons-sm fb-ic"><i class="fab fa-facebook"></i></a>
+                                <!--Twitter-->
+                                <a class="icons-sm tw-ic"><i class="fab fa-twitter"></i></a>
+                                <!--Google +-->
+                                <a class="icons-sm inst-ic"><i class="fab fa-instagram"> </i></a>
+                                <!--Linkedin-->
+                                <a class="icons-sm tmb-ic"><i class="fab fa-tumblr"> </i></a>
+                                <!--Pinterest-->
+                                <a class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
+                            </div>
+                            <!-- Top Social Section -->
+                        </div>
+                        <!-- Left Header Section -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="logo">
+                            <a href="index.html"><img src="/static/image/1logo.png" alt="Tech NewsLogo"></a>
+                        </div>
+                        <!-- Logo Section -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="right_section">
+                            <ul class="nav navbar-nav">
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    {% if not current_user.is_authenticated %}
+                                    <li><a href="/signup">Sign up</a></li>
+                                    <li><a href="/login">Log in</a></li>
+                                    {% else %}
+                                    <li>
+                                      <a href="/users/{{ current_user.id}}/bookmark">
+                                        Bookmark
+                                      </a>
+                                      </li>
+                                      
+                                      <li><a href="/logout">Log out</a></li>
+                                      {% endif %}
+                                </ul>
+
+                            </ul>
+                        </div>
+                        <!-- Right Header Section -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flash messages -->
+            
+            <div class="container">
+                {% for category, message in get_flashed_messages (with_categories=True) %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Header Section -->
+    
+            <div class="navigation-section">
+                <nav class="navbar m-menu navbar-default">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span
+                                    class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+                            <ul class="nav navbar-nav main-nav">
+                                <li class="active"><a href="/news">Top Headlines</a></li>
+                                <li><a href="/news/tech">Technology</a></li>
+                                <li><a href="/news/business">Business</a></li>
+                                <li><a href="/news/sports">Sports</a></li>
+                                <li><a href="/news/entertainment">Entertainment</a></li>
+                            </ul>
+                        </div>
+                        <!-- .navbar-collapse -->
+                    </div>
+                    <!-- .container -->
+                </nav>
+                <!-- .nav -->
+            </div>
+            <!-- .navigation-section -->
+        </div>
+        <!-- .container -->
+    </section>
+    <!-- Latest compiled and minified CSS -->
+<br>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 col-xl-3 order-2 order-lg-1">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Kathy Davis" class="img-fluid rounded-circle mb-2" width="128" height="128">
+                        <h4 class="card-title mb-0">{{current_user.username}}</h4>
+                        <div class="text-muted mb-2">Front-end Developer</div>
+    
+                        <div>
+                            <a class="btn btn-primary btn-sm" href="#">Follow</a>
+                            <a class="btn btn-primary btn-sm" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg> Message</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+                <div class="card">
+                    <div class="card-body h-100">
+                        {% for news, desc, img, url in context %}
+                        <div class="media">
+                            <img src="{{ img }}" width="56" height="56" alt="Andrew Jones">
+                            <div class="media-body">
+                                <small class="float-right text-navy">30m ago</small>
+                                <p class="mb-2"><strong>{{news}}</strong></p>
+                                <p>
+                                    {{ desc }}
+                                </p>
+                                <small class="text-muted">Today 7:21 pm</small>
+                                <br>
+                                <form action="/">
+                                    <a href="{{ url }}" class="btn btn-primary">More Info</a>              
+                                  </form>
+                  
+                                  <!-- <button class="btn btn-sm m-auto">
+                                    <i class="fas fa-bookmark"></i>
+                                  </button>
+                                  Bookmark -->
+
+                                  <span style="btn btn-sm m-auto">
+                                    {% if not saved %}
+                                     <i class="far fa-bookmark"></i>
+                                    {% else %} 
+                                     <i class="fas fa-bookmark"></i>
+                                    {% endif %}
+                                  </span> 
+                                  Bookmark
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                        <div class="col-12 col-lg-8 col-xl-6 order-1 order-lg-2">
+                            <div class="card">
+                                <div class="card-body h-100">
+                                    {% for bookmark in bookmarks %}
+                                    <div class="media">
+                                        <img src="{{ img }}" width="56" height="56" alt="Andrew Jones">
+                                        <div class="media-body">
+                                            <small class="float-right text-navy">30m ago</small>
+                                            <p class="mb-2"><strong>{{bookmark.news}}</strong></p>
+                                            <p>
+                                                {{ bookmark.description }}
+                                            </p>
+                                            <small class="text-muted">Today 7:21 pm</small>
+                                            <br>
+                                            <a href="#" class="btn btn-sm btn-danger mt-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart feather-sm">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                </svg> Like</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+{% endblock %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/static/script/script.js"></script>
+</body>
+</html>
