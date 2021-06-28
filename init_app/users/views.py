@@ -279,7 +279,7 @@ def user_profile():
             current_user.bio = form.bio.data
 
             db.session.commit()
-            # print("Account changed")
+            print("Account changed")
 
     return render_template('users/profile/profile.html', form=form)
 
