@@ -1,6 +1,6 @@
 # Read Comment News
 
-This is for people who likes to read the news and leave their thoughts.
+This is for people who likes to read the news and leave their thoughts. The user would read a news article then bookmark it. After the user would leave their comments and other users can leave their comment also creating a form. Any user can see what you bookmark and comment on, and if you like the user thoughts and interest then the user can follow them. Also, the user can message anyone he or she is following. 
 App runs Python, Flask, PostgreSQL, javascript, jQuery
 
 # Database 
