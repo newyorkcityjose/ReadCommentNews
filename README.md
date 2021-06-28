@@ -9,7 +9,8 @@ Create local setting example looking for the name local_settings_example.txt
 
 # API Key
 
-Create an account on newsapi.org for api example look at local_settings_example.txt
+Create an account on [newsapi.org](https://newsapi.org/) to get API key.
+Example look at local_settings_example.txt
 
 
 # Installation
@@ -45,6 +46,11 @@ Windows
 ```
 .\env\Scripts\activate
 ```
+
+or cd into env directory then
+```
+scripts\activate
+```
 Mac OS Linux
 
 ```
@@ -60,7 +66,9 @@ pip install -r requirements.txt
 Create and apply changes into the databse
 
 ```
-flask db upgrade  
+flask db init
+flask db migrate -m "First migrate"
+flask db upgrade
 ```
 
 Run flask app
@@ -68,6 +76,6 @@ Run flask app
 ```
 flask run
 ```
-## Contributing
+# Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
