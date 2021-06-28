@@ -16,11 +16,10 @@
                           <div class="col-md-8" >
                             <div class="card-body">
                               <h5 class="card-title"><a href="/user_profile/{{user.id}}/">{{user.username}}</a></h5>
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                              <li>{{user.user_follower}}</li>
+                              <p class="card-text">{{user.bio}}</p>
                               <div style="display: inline-block">
                                 <form action="/list_users/{{user.id}}/" method="POST">
-                                    <input type="submit" class="btn btn-primary btn-sm" style="margin-bottom: 10px;" value="Follow">             
+                                    <input type="submit" class="btn btn-primary btn-sm" style="margin-bottom: 10px;" value="{% if user.user_follower %}Unfollow{% else %}Follow{% endif %}">             
                                 </form>
                                 </div>
                                 <div style="display: inline-block">

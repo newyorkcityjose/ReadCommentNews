@@ -40,5 +40,14 @@
                 <hr>
                 {% endfor %}
 
+                <!-- <nav aria-label="...">
+                  <ul class="pager">
+                    <li class="previous {% if page == 1%}disable{% endif %}"><a href="/news/?page={{page - 1}}&cat={% if cat_origin %}{{cat_origin}}{% endif %}"><span aria-hidden="true">&larr;</span>Newer</a></li>
+                    <li class="next {% if page == pages %}disable{% endif %}"><a href="
+                      /news/?page={{page + 1}}&cat={% if cat_origin %}{{cat}}{% endif %}
+                      ">Older <span aria-hidden="true">&rarr;</span></a></li>
+                  </ul>
+                </nav> -->
+
 
 {% endblock %}

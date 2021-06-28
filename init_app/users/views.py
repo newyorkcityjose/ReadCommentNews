@@ -313,6 +313,7 @@ def list_users(user_id):
             "id": user.id,
             "username": user.username,
             "user_follower": user.id in [usr.user_follower_id for usr in users_following],
+            "bio": user.bio,
             "profile_image": user.get_profile_image,
         } for user in users if user.id in [usr.user_follower_id for usr in users_following]]
     else:
@@ -320,6 +321,7 @@ def list_users(user_id):
             "id": user.id,
             "username": user.username,
             "user_follower": user.id in [usr.user_follower_id for usr in users_following],
+            "bio": user.bio,
             "profile_image": user.get_profile_image,
         } for user in users]
     return render_template("users/list_users/list_users.html", users=users)
