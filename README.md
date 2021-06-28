@@ -60,7 +60,9 @@ pip install -r requirements.txt
 Create and apply changes into the databse
 
 ```
-flask db upgrade  
+flask db init
+flask db migrate -m "First migrate"
+flask db upgrade
 ```
 
 Run flask app
