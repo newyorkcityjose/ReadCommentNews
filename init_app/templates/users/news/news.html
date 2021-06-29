@@ -40,14 +40,28 @@
                 <hr>
                 {% endfor %}
 
-                <!-- <nav aria-label="...">
+
+                <nav aria-label="...">
                   <ul class="pager">
-                    <li class="previous {% if page == 1%}disable{% endif %}"><a href="/news/?page={{page - 1}}&cat={% if cat_origin %}{{cat_origin}}{% endif %}"><span aria-hidden="true">&larr;</span>Newer</a></li>
-                    <li class="next {% if page == pages %}disable{% endif %}"><a href="
-                      /news/?page={{page + 1}}&cat={% if cat_origin %}{{cat}}{% endif %}
+                    <li class="previous {% if context.page|int == 1%}disabled{% endif %}"><a href="
+                      {% if context.page|int != 1%}/news/?page={{context.page|int - 1}}&cat={% if context.cat_origin %}{{context.cat_origin}}{% endif %}
+                      {% else %}{% endif %}"><span aria-hidden="true">&larr;</span>Newer</a></li>
+                    <li class="next {% if context.page|int == context.pages|int %}disabled{% endif %}"><a href="
+                      {% if context.page|int != context.pages|int %}
+                      /news/?page={{context.page|int + 1}}&cat={% if context.cat_origin %}{{context.cat_origin}}{% endif %}
+                      {% else %}{% endif %}
                       ">Older <span aria-hidden="true">&rarr;</span></a></li>
                   </ul>
-                </nav> -->
+                </nav> 
+
+                <script>
+                  const btnDisabled = document.querySelector('.disabled').querySelector('a')
+
+                  btnDisabled.addEventListener('click', function(e){
+                    e.preventDefault()
+                    
+                  })
+                </script>
 
 
 {% endblock %}

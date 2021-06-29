@@ -8,6 +8,7 @@ from datetime import date
 from init_app.picture_handler import add_profile_pic
 import datetime 
 import arrow 
+import math
 
 import os
 
@@ -194,6 +195,7 @@ def user_news_technology():
         return redirect("/login")
     
     cat = request.args.get("cat", None)
+    page = request.args.get("page", "1")
     
     form = CommentForm()
 
@@ -217,10 +219,11 @@ def user_news_technology():
     if request.method == "GET":
         if cat is not None and cat in ["technology", "business", "entertainment", "sports"]:
             topheadlines = newsapi.get_top_headlines(sources=None,
-            category=cat, q=None, language='en', country='us', page_size=12)
+            category=cat, q=None, language='en', country='us', page_size=12, page=int(page))
         else:
-            topheadlines = newsapi.get_top_headlines(sources=None, q=None, language='en', country='us', page_size=12)
+            topheadlines = newsapi.get_top_headlines(sources=None, q=None, language='en', country='us', page_size=12, page=int(page))
             cat = None
+    
         articles = topheadlines['articles']
         desc = []
         news = []
@@ -229,9 +232,8 @@ def user_news_technology():
         ids = []
         time = []
         saved = []
-        print(articles[0]["publishedAt"])
-        date = datetime.datetime.strptime(articles[0]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ")
-        print(date)
+    
+
         for i in range(len(articles)):
             myarticles = articles[i]
 
@@ -244,7 +246,10 @@ def user_news_technology():
             saved.append(db.session.query(Bookmark.url).filter_by(url=myarticles['url'], user_id=current_user.id).first() is not None)
 
             mylist = zip(ids, news, desc, img, url, saved, time)
-        return render_template(f'users/news/news.html', context={"cat": cat.upper() if cat is not None else "TOP HEADLINES", "mylist": mylist}, form=form)
+        return render_template(f'users/news/news.html', context={
+            "cat": cat.upper() if cat is not None else "TOP HEADLINES", "mylist": mylist, 
+            "page": page, "pages": math.ceil(topheadlines["totalResults"]/12), "cat_origin": cat,
+        }, form=form)
     else:
         return render_template('404.html')
 
