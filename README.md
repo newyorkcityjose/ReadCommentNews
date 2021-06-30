@@ -5,7 +5,7 @@ App runs Python, Flask, PostgreSQL, javascript, jQuery
 
 # Database 
 
-Create local setting example looking for the name local_settings_example.txt
+Create local setting example looking for the name local_settings_example.txt. This project uses Postgre with SQLAlchemy as a object-relational mapper (ORM). 
 
 # API Key
 
