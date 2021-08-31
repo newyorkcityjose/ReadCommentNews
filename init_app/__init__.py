@@ -15,6 +15,18 @@ newsapi = NewsApiClient(api_key=API)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', DATABASE))
 
+# import urllib.parse as up
+# import psycopg2
+
+# up.uses_netloc.append("postgres")
+# url = up.urlparse(os.environ["DATABASE_URL"])
+# conn = psycopg2.connect(database=url.path[1:],
+# user=url.username,
+# password=url.password,
+# host=url.hostname,
+# port=url.port
+# )
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
