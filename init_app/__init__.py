@@ -5,18 +5,15 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from newsapi import NewsApiClient
 from init_app.models import User, db, connect_db
-try:
-    from init_app.local_settings import DATABASE, API
-except Exception as e:
-    pass
+from init_app.local_settings import DATABASE, API
 app = Flask(__name__)
 
 CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
-newsapi = NewsApiClient(api_key=os.environ.get("API"))
+newsapi = NewsApiClient(api_key=API)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE', os.environ.get("DATABASE")))
+    os.environ.get('DATABASE', DATABASE))
 
 # import urllib.parse as up
 # import psycopg2
