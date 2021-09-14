@@ -5,7 +5,10 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from newsapi import NewsApiClient
 from init_app.models import User, db, connect_db
-from init_app.local_settings import DATABASE, API
+try:    
+    from init_app.local_settings import DATABASE, API
+except Exception:
+    pass
 app = Flask(__name__)
 
 CURR_USER_KEY = "curr_user"
