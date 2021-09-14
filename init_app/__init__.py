@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
-newsapi = NewsApiClient(api_key=API)
+newsapi = NewsApiClient(api_key=os.environ.get("API", API))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE', DATABASE))
