@@ -13,12 +13,10 @@ app = Flask(__name__)
 
 CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
-print(os.environ.get("API", API))
-print( os.environ.get('DATABASE', DATABASE))
-newsapi = NewsApiClient(api_key=os.environ.get("API", API))
+newsapi = NewsApiClient(api_key=os.environ.get("API"))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE', DATABASE))
+    os.environ.get('DATABASE'))
 
 # import urllib.parse as up
 # import psycopg2
