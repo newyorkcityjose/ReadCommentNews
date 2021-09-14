@@ -1,1 +1,1 @@
-web: gunicorn readnewscomment:app
+web: gunicorn run:app 
