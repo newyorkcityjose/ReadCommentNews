@@ -70,7 +70,7 @@ def user_bookmark_id(user_id, bookmark_id):
     # out_comments = get_comments_exist(bookmark.id)
     # print(out_comments)
     form = CommentForm()
-    return render_template('users/bookmark/bookmarkid.html', bookmark=bookmark, user_id=user_id, form=form)
+    return render_template('users/bookmark/bookmarkId.html', bookmark=bookmark, user_id=user_id, form=form)
 
 ###################################
 ## comments
